@@ -79,6 +79,13 @@ main { max-width: 640px; margin: 0 auto; display: grid; gap: 40px; }
 
 .about { margin: 0; max-width: 60ch; font-size: 1.05rem; }
 
+/* Яндекс Форма: ширина по колонке, высоту подставляет embed.js */
+.signup { min-width: 0; }
+.signup iframe {
+  display: block; width: 100%; max-width: 100%; min-height: 360px;
+  border: 1px solid var(--line); border-radius: 6px; background: #fff;
+}
+
 h2 { font: 500 .8rem var(--body); text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin: 0 0 10px; }
 .cats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
 .cat { border: 1px solid var(--line); border-radius: 6px; padding: 14px; display: grid; gap: 4px; align-content: start; min-width: 0; }
@@ -132,6 +139,12 @@ button:hover { border-color: var(--accent); }
   <p class="dims">Формат 90 × 50 мм</p>
 
   <p class="about">Готовим к экзамену в ГИБДД с 2009 года. Теория в классе или онлайн, практика на автодроме и в городе на машинах с механикой и автоматом. Группы стартуют каждый месяц.</p>
+
+  <section class="signup">
+    <h2>Записаться на обучение</h2>
+    <script src="https://forms.yandex.ru/_static/embed.js"></script>
+    <iframe src="https://forms.yandex.ru/u/6aeb6f1d2c4f89f423edb708?iframe=1" frameborder="0" name="ya-form-6aeb6f1d2c4f89f423edb708" width="650" title="Форма записи в автошколу"></iframe>
+  </section>
 
   <section>
     <h2>Категории</h2>
