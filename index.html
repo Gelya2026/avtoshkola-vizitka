@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Автошкола «Зелёная волна»</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Onest:wght@400;500;600&display=swap">
+<style>
+/* Layout: визитка 90×50 мм со знаком «У» как главный объект, ниже — категории обучения и контакты */
+:root {
+  --bg: #eceeea;
+  --fg: #1b1f1c;
+  --muted: #5d655f;
+  --line: #d2d7d1;
+  --card: #ffffff;
+  --accent: #1e7a4c;
+  --sign-red: #d3262b;
+  --sign-white: #ffffff;
+  --display: "Unbounded", "Arial Black", system-ui, sans-serif;
+  --body: "Onest", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121513; --fg: #e7ebe6; --muted: #98a29a; --line: #2b322d;
+    --card: #1b201c; --accent: #5fc690; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121513; --fg: #e7ebe6; --muted: #98a29a; --line: #2b322d;
+  --card: #1b201c; --accent: #5fc690; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { margin: 0; }
+body {
+  background: var(--bg); color: var(--fg);
+  font: 400 1rem/1.6 var(--body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: clamp(32px, 8vw, 80px);
+}
+main { max-width: 640px; margin: 0 auto; display: grid; gap: 40px; }
+
+.card {
+  aspect-ratio: 90 / 50; max-width: 100%;
+  background: var(--card); border: 1px solid var(--line); border-radius: 6px;
+  box-shadow: 0 1px 2px rgb(0 0 0 / .06), 0 18px 40px -20px rgb(20 40 30 / .35);
+  display: grid; grid-template-columns: 1fr auto; overflow: hidden; position: relative;
+}
+.card::after { /* дорожная разметка по нижнему краю */
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 6px;
+  background: repeating-linear-gradient(90deg, var(--fg) 0 28px, transparent 28px 44px);
+  opacity: .85;
+}
+.card-main { padding: clamp(18px, 5vw, 36px); padding-bottom: clamp(22px, 6vw, 42px); display: flex; flex-direction: column; justify-content: space-between; min-width: 0; }
+.kicker { font-size: clamp(.65rem, 2vw, .78rem); text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin: 0 0 4px; }
+.name { font: 700 clamp(1.2rem, 4.8vw, 2.1rem)/1.1 var(--display); margin: 0; text-wrap: balance; letter-spacing: -.01em; }
+.name span { color: var(--accent); }
+.role { color: var(--muted); margin: 6px 0 0; font-size: clamp(.8rem, 2.5vw, 1rem); }
+.card-phone { font-size: clamp(.85rem, 2.6vw, 1.05rem); font-weight: 600; font-variant-numeric: tabular-nums; }
+.card-side { width: clamp(76px, 22vw, 150px); display: grid; place-items: center; padding-right: clamp(12px, 4vw, 30px); }
+.card-side svg { width: 100%; height: auto; }
+.dims { margin: -28px 0 0; font-size: .75rem; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+
+.about { margin: 0; max-width: 60ch; font-size: 1.05rem; }
+
+h2 { font: 500 .8rem var(--body); text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin: 0 0 10px; }
+.cats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.cat { border: 1px solid var(--line); border-radius: 6px; padding: 14px; display: grid; gap: 4px; align-content: start; min-width: 0; }
+.cat b { font: 700 1.6rem/1 var(--display); color: var(--accent); }
+.cat .t { font-weight: 500; }
+.cat .d { font-size: .85rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+.contacts { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.contacts li {
+  display: grid; grid-template-columns: 7.5rem 1fr auto; gap: 12px; align-items: center;
+  padding-block: 14px; border-bottom: 1px solid var(--line);
+}
+.label { font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+.value { font-weight: 500; min-width: 0; overflow-wrap: anywhere; user-select: all; font-variant-numeric: tabular-nums; }
+button {
+  font: 500 .8rem var(--body); color: var(--accent); background: transparent;
+  border: 1px solid var(--line); border-radius: 4px; padding: 5px 10px; cursor: pointer;
+}
+button:hover { border-color: var(--accent); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.contacts li.no-copy button { visibility: hidden; }
+.note { font-size: .8rem; color: var(--muted); margin: 0; }
+
+@media (max-width: 480px) {
+  .cats { grid-template-columns: 1fr; }
+  .contacts li { grid-template-columns: 1fr auto; row-gap: 2px; }
+  .label { grid-column: 1 / -1; }
+}
+</style>
+</head>
+<body>
+
+<main>
+  <div class="card" aria-label="Визитка автошколы">
+    <div class="card-main">
+      <div>
+        <p class="kicker">Автошкола</p>
+        <h1 class="name">Зелёная <span>волна</span></h1>
+        <p class="role">Обучение вождению категорий A, B, BE</p>
+      </div>
+      <span class="card-phone">+7 900 123-45-67</span>
+    </div>
+    <div class="card-side" aria-hidden="true">
+      <!-- опознавательный знак «Учебное транспортное средство» -->
+      <svg viewBox="0 0 100 88">
+        <path d="M50 4 L96 84 H4 Z" fill="var(--sign-white)" stroke="var(--sign-red)" stroke-width="8" stroke-linejoin="round"/>
+        <text x="50" y="72" text-anchor="middle" font-family="Arial, sans-serif" font-weight="700" font-size="44" fill="#1b1f1c">У</text>
+      </svg>
+    </div>
+  </div>
+  <p class="dims">Формат 90 × 50 мм</p>
+
+  <p class="about">Готовим к экзамену в ГИБДД с 2009 года. Теория в классе или онлайн, практика на автодроме и в городе на машинах с механикой и автоматом. Группы стартуют каждый месяц.</p>
+
+  <section>
+    <h2>Категории</h2>
+    <div class="cats">
+      <div class="cat"><b>B</b><span class="t">Легковой автомобиль</span><span class="d">3 месяца · 56 ч вождения</span></div>
+      <div class="cat"><b>A</b><span class="t">Мотоцикл</span><span class="d">2 месяца · 18 ч вождения</span></div>
+      <div class="cat"><b>BE</b><span class="t">С прицепом</span><span class="d">1 месяц · 16 ч вождения</span></div>
+    </div>
+  </section>
+
+  <ul class="contacts">
+    <li><span class="label">Телефон</span><span class="value" id="v-phone">+7 900 123-45-67</span><button type="button" data-copy="v-phone">Копировать</button></li>
+    <li><span class="label">Почта</span><span class="value" id="v-mail">info@zelvolna-auto.ru</span><button type="button" data-copy="v-mail">Копировать</button></li>
+    <li><span class="label">Адрес</span><span class="value" id="v-addr">ул. Садовая, 12, 2 этаж</span><button type="button" data-copy="v-addr">Копировать</button></li>
+    <li class="no-copy"><span class="label">Часы работы</span><span class="value">Пн–Сб, 9:00–20:00</span><button type="button" tabindex="-1" aria-hidden="true">—</button></li>
+  </ul>
+
+  <p class="note">Пример: название, сроки и контакты вымышленные — замените на свои.</p>
+</main>
+
+<script>
+document.querySelectorAll('[data-copy]').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    var el = document.getElementById(btn.dataset.copy);
+    var reset = function () { setTimeout(function () { btn.textContent = 'Копировать'; }, 1600); };
+    var fallback = function () {
+      var r = document.createRange(); r.selectNodeContents(el);
+      var s = getSelection(); s.removeAllRanges(); s.addRange(r);
+      btn.textContent = 'Выделено'; reset();
+    };
+    try { navigator.clipboard.writeText(el.textContent).then(function () { btn.textContent = 'Скопировано'; reset(); }, fallback); } catch (e) { fallback(); }
+  });
+});
+</script>
+</body>
+</html>
